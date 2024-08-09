@@ -37,7 +37,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "D:/Personal_Projects/McKinsey/assessment-manager/node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": []
           },
@@ -104,5 +105,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "5537b07c-d5c1-440f-8c51-c827aff36492"
   }
 }

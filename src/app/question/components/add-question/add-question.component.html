@@ -1,0 +1,74 @@
+<div class="container mt-5 d-flex justify-content-center">
+    <div class="card">
+        <div class="card-body p-5">
+            <h2 class="text-center mb-5">Add New Question</h2>
+
+            <form [formGroup]="questionForm" (ngSubmit)="onSubmit()">
+                <div class="form-outline mb-4">
+                    <label class="form-label required">Question Text</label>
+                    <input type="text" class="form-control form-control-lg" formControlName="questionText" />
+                    <div class="error-message" *ngIf="questionForm.get('questionText')?.touched && questionForm.get('questionText')?.invalid">
+                        <p>Question text is required</p>
+                    </div>
+                </div>
+
+                <div class="form-outline mb-4">
+                    <label class="form-label required">Options</label>
+                    <div formArrayName="options">
+                        <div *ngFor="let option of options.controls; let i = index" [formGroupName]="i">
+                            <div class="mb-2">
+                                <input
+                                    type="text"
+                                    class="form-control form-control-lg mb-2"
+                                    formControlName="optionText"
+                                    placeholder="Option {{ i + 1 }}"
+                                />
+                            </div>
+                            <div>
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        formControlName="isCorrect"
+                                    />
+                                    Correct
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="error-message" *ngIf="options.invalid && (options.dirty || options.touched)">
+                        <p>A question must have exactly 4 options.</p>
+                    </div>
+                </div>                
+
+                <!-- Marks -->
+                <div class="form-outline mb-4">
+                    <label class="form-label required">Marks</label>
+                    <input type="number" class="form-control form-control-lg" formControlName="marks" />
+                    <div class="error-message" *ngIf="questionForm.get('marks')?.touched && questionForm.get('marks')?.invalid">
+                        <p>Marks must be a positive number</p>
+                    </div>
+                </div>
+
+                <!-- Negative Marks -->
+                <div class="form-outline mb-4">
+                    <label class="form-label">Negative Marks</label>
+                    <input type="number" class="form-control form-control-lg" formControlName="negativeMarks" />
+                    <div class="error-message" *ngIf="questionForm.get('negativeMarks')?.touched && questionForm.get('negativeMarks')?.invalid">
+                        <p>Negative marks must be a non-negative number</p>
+                    </div>
+                </div>
+
+                <!-- Tags -->
+                <div class="form-outline mb-4">
+                    <label class="form-label">Tags</label>
+                    <input type="text" class="form-control form-control-lg" formControlName="tags" placeholder="Comma separated tags" />
+                </div>
+
+                <!-- Submit Button -->
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary" [disabled]="questionForm.invalid">Add Question</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
